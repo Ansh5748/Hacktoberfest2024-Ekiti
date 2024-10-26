@@ -1,0 +1,21 @@
+/**
+ * Debounce function that limits the rate at which a function can fire.
+ *
+ * @param {Function} func - The function to debounce.
+ * @param {number} delay - The number of milliseconds to delay.
+ * @returns {Function} - A debounced version of the given function.
+ */
+function debounce(func, delay) {
+    let timeoutId;
+    return function(...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+// Example Usage
+const onResize = debounce(() => {
+    console.log('Resize event triggered!');
+}, 500);
+
+window.addEventListener('resize', onResize);
